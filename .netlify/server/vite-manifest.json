@@ -63,14 +63,6 @@
       "_index.js"
     ]
   },
-  "src/routes/login/+page.svelte": {
-    "file": "entries/pages/login/_page.svelte.js",
-    "src": "src/routes/login/+page.svelte",
-    "isEntry": true,
-    "imports": [
-      "_index.js"
-    ]
-  },
   "_index.js": {
     "file": "chunks/index.js"
   },
