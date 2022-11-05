@@ -1,5 +1,7 @@
-//const API_URL = "http://localhost:5000";
-const API_URL = "https://api.vivuca.com";
+const API_URL_DEV = "http://localhost:5000";
+const API_URL_PROD = "https://api.vivuca.com";
+
+const API_URL = true ? API_URL_PROD : API_URL_DEV;
 
 function setCookie(name,value,days) {
     var expires = "";
@@ -25,14 +27,16 @@ function eraseCookie(name) {
 }
 
 async function api (path,data) {
-        //let jwt = getCookie("jwt");
+        let jwt = getCookie("auth");
+        console.log("jwt",jwt);
         const res = await fetch(API_URL+path, {
             method: 'POST',
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json", "Authorization": "Bearer "+jwt },
             body: JSON.stringify(data)
         });
         
         const json = await res.json();
+        
         if(json.alert){
             Toastify({
                 text: json.alert,
@@ -40,13 +44,13 @@ async function api (path,data) {
             }).showToast();
         }
 
+        if(json.cookies){
+            setCookie("auth",json.cookies);
+        }
+
         if(json.redirect){
             window.open(json.redirect,"_self");
         }
-
-        /* if(json.cookies){
-            setCookie("jwt",json.jwt);
-        } */
 
         console.log(JSON.stringify(json));
         return json;

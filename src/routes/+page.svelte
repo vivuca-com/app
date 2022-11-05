@@ -3,9 +3,7 @@
   import api from "$lib/api.js";
   var email = "",password = "";
   async function login(){
-    
     let response = await api("/auth/login",{email:email,password:password});
-
   }
 </script>
 
@@ -29,7 +27,7 @@
                       <input bind:value={password} type="password" class="form-control form-control-lg" placeholder="Password" aria-label="Password">
                     </div>
                     <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" id="rememberMe">
+                      <input class="form-check-input" checked type="checkbox" id="rememberMe">
                       <label class="form-check-label" for="rememberMe">Remember me</label>
                     </div>
                     <div class="text-center">

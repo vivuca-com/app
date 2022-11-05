@@ -12,6 +12,7 @@
     try{
       contracts = [{}];
       contracts = await api("/contracts/fetch");
+      console.log("fetched");
       for(let contract of contracts){
         if(contract.status == "pending") contract.action = "Send";
         else if(contract.status == "sent") contract.action = "Remind";
